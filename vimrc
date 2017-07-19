@@ -145,39 +145,38 @@ vmap <silent> <Leader>fy <Plug>DictVSearch
                     "autospace
 "设置= + - * 前后自动插入空格
 "-------- -------- -------- -------- -------- --------
-au FileType python inoremap <buffer>, ,<space>
-let g:equ=1
-if exists("g:equ")
+"au FileType python inoremap <buffer>, ,<space>
+"let g:equ=1
+"if exists("g:equ")
     " :inoremap << <c-r>=EqualSign('<<')<CR>
     " :inoremap >> <c-r>=EqualSign('>>')<CR>
-    :inoremap + <c-r>=EqualSign('+')<CR>
+ "   :inoremap + <c-r>=EqualSign('+')<CR>
     " :inoremap - <c-r>=EqualSign('-')<CR>
     " :inoremap * <c-r>=EqualSign('*')<CR>
-    :inoremap = <c-r>=EqualSign('=')<CR>
+ "   :inoremap = <c-r>=EqualSign('=')<CR>
     " :inoremap += <c-r>=EqualSign('+=')<CR>
-endif
+"endif
 
-function! EqualSign(char)
-    if a:char =~ '=' && getline('.') =~ ".*("
-        return a:char
-    endif
-    let ex1 = getline('.')[col('.') - 3]
-    let ex2 = getline('.')[col('.') - 2]
-    if ex1 =~ "[-=+><>\/\*]"
-        if ex2 !~ "\s"
-            return "\<ESC>i".a:char."\<SPACE>"
-        else
-            return "\<ESC>xa".a:char."\<SPACE>"
-        endif
-    else
-        if ex2 !~ "\s"
-            return "\<SPACE>".a:char."\<SPACE>\<ESC>a"
-        else
-            return a:char."\<SPACE>\<ESC>a"
-        endif
-    endif
-endf
-
+"function! EqualSign(char)
+"    if a:char =~ '=' && getline('.') =~ ".*("
+"        return a:char
+"    endif
+"    let ex1 = getline('.')[col('.') - 3]
+"    let ex2 = getline('.')[col('.') - 2]
+"    if ex1 =~ "[-=+><>\/\*]"
+"        if ex2 !~ "\s"
+"            return "\<ESC>i".a:char."\<SPACE>"
+"        else
+"            return "\<ESC>xa".a:char."\<SPACE>"
+"        endif
+"    else
+"        if ex2 !~ "\s"
+"            return "\<SPACE>".a:char."\<SPACE>\<ESC>a"
+"        else
+"            return a:char."\<SPACE>\<ESC>a"
+"        endif
+"    endif
+"endf
 
 
 
@@ -307,7 +306,8 @@ set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
 " set background=light
 set background=dark
 
-colorscheme default
+colorscheme molokai
+
 " colorscheme tir_black
 " colorscheme space-vim-dark
 "
@@ -360,10 +360,18 @@ endfunction
                     " Air-line
 "-------- -------- -------- -------- -------- --------
 let g:airline_powerline_fonts=1
-let g:airline_theme='light'
+let g:airline_theme='simple'
+"let g:airline_section_b='%{strftime("%c")}'
 
 " 显示上面的buffer tab
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+" 关闭状态显示空白符号计数
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
 "
 "-------- -------- -------- -------- -------- --------
                     " buffer
@@ -403,12 +411,12 @@ set nocompatible
 set confirm                                                       " prompt when existing from an unsaved file
 set backspace=indent,eol,start                                    " More powerful backspacing
 set t_Co=256                                                      " Explicitly tell vim that the terminal has 256 colors "
-set mouse=a                                                       " use mouse in all modes
+"set mouse=a                                                       " use mouse in all modes
 set report=0                                                      " always report number of lines changed                "
 set nowrap                                                        " dont wrap lines
 set scrolloff=5                                                   " 5 lines above/below cursor when scrolling
 set number                                                        " show line numbers
-set relativenumber
+"set relativenumber
 set showmatch                                                     " show matching bracket (briefly jump)
 set showcmd                                                       " show typed command in status bar
 set title                                                         " show file in titlebar
@@ -430,7 +438,7 @@ set tabstop=4       " tab width
 set softtabstop=4   " backspace
 set shiftwidth=4    " indent width
 
-"set textwidth=79
+set textwidth=79
 "set smarttab
 set expandtab       " expand tab to space
 
